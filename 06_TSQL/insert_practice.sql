@@ -1,27 +1,50 @@
+ï»¿create table testTbl(id int, userName nchar(3), age int);
+go
+
+-- DML ì¤‘ SELECT 
+select * from testTbl;
 
 
-insert into userTbl values ('LSG', 'ÀÌ½Â±â', 1987, '¼­¿ï', '011', '11111111', 182, '2008.8.8');
-insert into userTbl values ('KBS', '±è¹ü¼ö', 1979, '°æ³²', '011', '22222222', 173, '2012.4.4');
-insert into userTbl values ('KKH', '±è°æÈ£', 1971, 'Àü³²', '019', '33333333', 177, '2007.7.7');
-insert into userTbl values ('JYP', 'Á¶¿ëÇÊ', 1950, '°æ±â', '011', '44444444', 166, '2009.4.4');
-insert into userTbl values ('SSK', '¼º½Ã°æ', 1979, '¼­¿ï', NULL, NULL, 186, '2013.12.12');
-insert into userTbl values ('LJB', 'ÀÓÀç¹ü', 1963, '¼­¿ï', '016', '66666666', 182, '2009.9.9');
-insert into userTbl values ('YJS', 'À±Á¾½Å', 1969, '°æ³²', NULL, NULL, 170, '2005.5.5');
-insert into userTbl values ('EJW', 'ÀºÁö¿ø', 1972, '°æºÏ', '011', '88888888', 174, '2014.3.3');
-insert into userTbl values ('JKW', 'Á¶°ü¿ì', 1965, '°æ±â', '018', '99999999', 172, '2010.10.10');
-insert into userTbl values ('BBK', '¹ÙºñÅ´', 1973, '¼­¿ï', '010', '00000000', 176, '2013.5.5');
-GO
- 
-insert into buyTbl values ('KBS', '¿îµ¿È­', NULL, 30, 2); 
-insert into buyTbl values ('KBS', '³ëÆ®ºÏ', 'ÀüÀÚ', 1000, 1);
-insert into buyTbl values ('JYP', '¸ğ´ÏÅÍ', 'ÀüÀÚ', 200, 1);
-insert into buyTbl values ('BBK', '¸ğ´ÏÅÍ', 'ÀüÀÚ', 200, 5);
-insert into buyTbl values ('KBS', 'Ã»¹ÙÁö', 'ÀÇ·ù', 50, 3);
-insert into buyTbl values ('BBK', '¸Ş¸ğ¸®', 'ÀüÀÚ', 80, 10);
-insert into buyTbl values ('SSK', 'Ã¥', '¼­Àû', 15, 5);
-insert into buyTbl values ('EJW', 'Ã¥', '¼­Àû', 15, 2);
-insert into buyTbl values ('EJW', 'Ã»¹ÙÁö', 'ÀÇ·ù', 50, 1);
-insert into buyTbl values ('BBK', '¿îµ¿È­', NULL, 30, 2);
-insert into buyTbl values ('EJW', 'Ã¥', '¼­Àû', 15, 1);
-insert into buyTbl values ('BBK', '¿îµ¿È­', NULL, 30, 2);
-GO
+-- DML ì¤‘ INSERT
+insert into testTbl values (1, 'í™ê¸¸ë™', 25);
+insert into testTbl(id, userName) values (2, 'ê¹€í˜„ìˆ˜');
+insert into testTbl values (3, 'í™ê¸¸ìˆœ'); -- ì—ëŸ¬ (í…Œì´ë¸” ì •ì˜ì™€ ë‹¤ë¥¸ í˜•ì‹) 
+insert into testTbl (id, age) values (4, 30); 
+insert into testTbl (userName, age) values ('ê³ ê¸¸ë™', 42); -- ì—ëŸ¬ (id(PK) í–‰ì€ NOT NULL) 
+
+
+-- identity ì†ì„± ì§€ì • (ìˆ˜ë™) -> í…Œì´ë¸”ì˜ ì†ì„±ì´ identityì¸ ê²½ìš° id ê°’ì€ ìë™ìœ¼ë¡œ ìƒì„± 
+insert into testTbl values ('ì„±ì‹œê²½', 44); 
+
+-- ê°•ì œë¡œ id ê°’ì„ ì…ë ¥í•  ê²½ìš° identity_insert ì˜µì…˜ì„ ì¼œì•¼í•¨ 
+set identity_insert testTbl on; 
+go
+insert into testTbl (id, userName, age) values (11, 'ê¹€í˜„ìˆ˜', 27); 
+set identity_insert testTbl off; 
+
+-- ì˜µì…˜ì„ ëŒ ê²½ìš° ë‹¤ì‹œ id ê°’ ìë™ ìƒì„± 
+insert into testTbl values ('ë°±ì¢…ì›', 52); 
+
+-- íŠ¹ì • í…Œì´ë¸”ì˜ í˜„ì¬ IDENTITY ê°’ í™•ì¸ 
+select IDENT_CURRENT('testTbl'); -- íŠ¹ì • í…Œì´ë¸”ì˜ ID ê°’ í™•ì¸ 
+select @@IDENTITY; -- í˜„ì¬ ì„¸ì…˜(ì¿¼ë¦¬)ì—ì„œ ê°€ì¥ ìµœê·¼ì— ìƒì„±ëœ í…Œì´ë¸”ì˜ ID ê°’ í™•ì¸ 
+
+select * from BikeStores.sales.order_items;
+select * from ShopDB.dbo.memberTBL;
+
+-- sales.order_items í…Œì´ë¸” ë³µì‚¬ 
+CREATE TABLE [sales_order_items](
+	[order_id] [int] NOT NULL,
+	[item_id] [int] NOT NULL,
+	[product_id] [int] NOT NULL,
+	[quantity] [int] NOT NULL,
+	[list_price] [decimal](10, 2) NOT NULL,
+	[discount] [decimal](4, 2) NOT NULL);
+
+insert into sales_order_items
+	select * from BikeStores.sales.order_items;
+
+select * from sales_order_items;
+
+
+

@@ -140,3 +140,49 @@ select count(*) as '구매내역' from buyTbl;
 -- 휴대폰이 있는 회원만 COUNT() 
 select count(mobile1) as '휴대폰이 있는 사용자' from userTbl; 
 
+
+-- 집계 함수 + 조건     HAVING 절 
+select userID, sum(price * amount) as '아이디별 구매금액' from buyTbl 
+	-- where sum(price * amount) > 1000    : 집계 함수는 where 절에 사용할 수 없음 
+	group by userID
+	having sum(price * amount) > 1000;  
+	-- GROUP BY [집계 대상] HAVING [조건] 순서로 작성 
+	
+/* ROLLUP() / CUBE()	중간 집계 함수 
+	ROLLUP() : 그룹별 총합 / 소집계가 필요한 경우 (단일 차원)
+	CUBE() : 결합 가능한 모든 값에 대해 다차원 집계를 생성 
+			 Grand Total (총집계) 가 양쪽 쿼리에서 모두 생성되므로 
+			 1회 제거 필요 <- 시스템 연산이 많음, 잘 안씀 
+*/ 
+
+
+select num, groupName, sum(price * amount) as '비용' from buyTbl
+	group by ROLLUP (groupName, num); 
+	-- groupName 을 기준으로 정렬, 소집계, 총집계 
+select num, groupName, sum(price * amount) as '비용' from buyTbl
+	group by ROLLUP (num, groupName); 
+	-- num 을 기준으로 정렬 (num은 구매 내역 PK 이므로 의미 없음) 
+select groupName, sum(price * amount) as '비용' from buyTbl
+	group by ROLLUP (groupName); 
+	-- 그룹화 하지 않고 소집계, 총집계만 출력 
+	
+
+-- WITH 절 : CTE를 표현하기 위한 구문 
+-- CTE : ? 
+-- 비재귀적 CTE / 재귀적 CTE 로 나뉨 
+
+-- 비재귀적 CTE 
+with cte_tmp(userID, total) -- total을 sum(price * amount) 로 치환 
+as ( 
+	select userID, sum(price * amount) as 'total' 
+		from buyTbl
+		group by userID ) 
+select * from cte_tmp order by total desc; 
+
+-- without CTE 
+select userID, sum(price * amount) as 'total' 
+	from buyTbl
+	group by userID
+	order by sum(price * amount) desc; 
+	-- userID 와 합계를 출력 / userID 로 그룹화, 구매총액 내림차순으로 정렬 
+
