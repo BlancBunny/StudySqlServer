@@ -1,4 +1,4 @@
-use sqlDB;
+ï»¿use sqlDB;
 go
 
 
@@ -6,7 +6,7 @@ create or alter proc usp_trycatch
 	@userID char(8),
 	@name nvarchar(10),
 	@birthyear int = 1900, 
-	@addr nchar(2) = '¼­¿ï',
+	@addr nchar(2) = 'ì„œìš¸',
 	@mobile1 char(3) = NULL,
 	@mobile2 char(8) = NULL,
 	@height smallint = 170, 
@@ -23,4 +23,4 @@ as
 	end catch
 go
 
-exec usp_trycatch 'SYJ', '¼Õ¿¬Àç';
+exec usp_trycatch 'SYJ', 'ì†ì—°ì¬';

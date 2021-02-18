@@ -1,9 +1,9 @@
-use tempdb;
+ï»¿use tempdb;
 go
 
 create database sqlDB;
 go 
---DB »ı¼º 
+--DB ìƒì„± 
 
 USE sqlDB;
 
@@ -12,9 +12,9 @@ create table userTbl
 	userID		char(8) NOT NULL PRIMARY KEY,
 	userName	nvarchar(10) not null, 
 	birthyear	 int not null,
-	addr		nchar(2) not null,		-- Áö¿ª 
-	mobile1		char(3),			-- ÈŞ´ëÆù ±¹¹ø 
-	mobile2		char(8),			-- ÈŞ´ëÆù ³ª¸ÓÁö 
+	addr		nchar(2) not null,		-- ì§€ì—­ 
+	mobile1		char(3),			-- íœ´ëŒ€í° êµ­ë²ˆ 
+	mobile2		char(8),			-- íœ´ëŒ€í° ë‚˜ë¨¸ì§€ 
 	height		smallint,
 	mDate		date 
 
@@ -23,11 +23,11 @@ go
 
 CREATE TABLE buyTbl
 (
-	num			INT IDENTITY NOT NULL PRIMARY KEY, -- ¼ø¹ø(PK) 
-	userID		char(8) not null	-- ¾ÆÀÌµğ(FK)
+	num			INT IDENTITY NOT NULL PRIMARY KEY, -- ìˆœë²ˆ(PK) 
+	userID		char(8) not null	-- ì•„ì´ë””(FK)
 	FOREIGN KEY REFERENCES userTbl(userID), 
-	prodName	nchar(6) not null,	-- ¹°Ç°¸í
-	groupName	nchar(4),			-- ºĞ·ù
-	price		int not null,		-- ´Ü°¡ 
+	prodName	nchar(6) not null,	-- ë¬¼í’ˆëª…
+	groupName	nchar(4),			-- ë¶„ë¥˜
+	price		int not null,		-- ë‹¨ê°€ 
 );
 GO 

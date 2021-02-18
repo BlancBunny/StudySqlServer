@@ -1,4 +1,4 @@
---use tempdb;
+ï»¿--use tempdb;
 --go 
 
 /*
@@ -15,11 +15,11 @@ create table userTBL (
 	userID		char(8)			not null	primary key, 
 	userName	nvarchar(10)	not null,
 	birthyear	int				not null	default year(getdate()), 
-	addr		nchar(2)		not null	default '¼­¿ï',
+	addr		nchar(2)		not null	default 'ì„œìš¸',
 	mobile1		char(3)			null,
 	mobile2		char(8)			null,
 	height		smallint		null		default 170,
-	eMail		varchar(50)		not null	unique,   -- ÀÌ¸ŞÀÏ Ãß°¡ 210210 14:25
+	eMail		varchar(50)		not null	unique,   -- ì´ë©”ì¼ ì¶”ê°€ 210210 14:25
 	mDate		date			null	
 );
 

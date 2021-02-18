@@ -1,11 +1,11 @@
-USE [BookRentalShopDB]
+ÔªøUSE [BookRentalShopDB]
 GO
 
 INSERT INTO [dbo].[cateTBL]
            ([cate_idx]
            ,[cateName])
      VALUES
-			('N0001', '∞¯∆˜/Ω∫∏±∑Ø')
+			('N0001', 'Í≥µÌè¨/Ïä§Î¶¥Îü¨')
 			
 
 GO	

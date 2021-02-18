@@ -1,7 +1,7 @@
-USE [sqlDB]
+ï»¿USE [sqlDB]
 GO
 
--- Æ®·£Àè¼Ç COMMIT/ROLLBACK (try-catch ¹®) 
+-- íŠ¸ëžœìž­ì…˜ COMMIT/ROLLBACK (try-catch ë¬¸) 
 BEGIN TRY
 	begin tran 
 	INSERT INTO [dbo].[userTbl]
@@ -15,9 +15,9 @@ BEGIN TRY
 			   ,[mDate])
 		 VALUES
 			   ('KJY'
-			   ,'±ÇÁö¿ë'
+			   ,'ê¶Œì§€ìš©'
 			   ,1988
-			   ,'¼­¿ï'
+			   ,'ì„œìš¸'
 			   ,'010'
 			   ,'12112317'
 			   ,'175'
@@ -31,7 +31,7 @@ BEGIN TRY
 			   ,[amount])
 		 VALUES
 			   ('KJY'
-			   ,'¼±±Û¶ó½º'
+			   ,'ì„ ê¸€ë¼ìŠ¤'
 			   ,NULL
 			   ,30000000
 			   ,1)

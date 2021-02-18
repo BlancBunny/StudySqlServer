@@ -1,101 +1,101 @@
-use sqlDB;
+ï»¿use sqlDB;
 go 
 
--- ÀÌ¸§ÀÌ ±è°æÈ£ÀÎ »ç¶÷ÀÇ ¸ğµç Á¤º¸ Á¶È¸ 
+-- ì´ë¦„ì´ ê¹€ê²½í˜¸ì¸ ì‚¬ëŒì˜ ëª¨ë“  ì •ë³´ ì¡°íšŒ 
 select * from userTbl
-  	where userName='±è°æÈ£';
+  	where userName='ê¹€ê²½í˜¸';
 
--- 1970³â ÀÌÈÄ Ãâ»ıÀÌ¸é¼­, Å° 182 ÀÌ»óÀÎ »ç¶÷ÀÇ ¾ÆÀÌµğ¿Í ÀÌ¸§ Á¶È¸ 
+-- 1970ë…„ ì´í›„ ì¶œìƒì´ë©´ì„œ, í‚¤ 182 ì´ìƒì¸ ì‚¬ëŒì˜ ì•„ì´ë””ì™€ ì´ë¦„ ì¡°íšŒ 
 select userID, userName from userTbl
 	where birthyear >= 1970 and height >= 182; 
 
--- 1970³â ÀÌÈÄ Ãâ»ıÀÌ°Å³ª, Å° 182 ÀÌ»óÀÎ »ç¶÷ÀÇ ¾ÆÀÌµğ¿Í ÀÌ¸§ Á¶È¸ 
+-- 1970ë…„ ì´í›„ ì¶œìƒì´ê±°ë‚˜, í‚¤ 182 ì´ìƒì¸ ì‚¬ëŒì˜ ì•„ì´ë””ì™€ ì´ë¦„ ì¡°íšŒ 
 select userID, userName from userTbl
 	where birthyear >= 1970 or height >= 182; 
 
--- Å° 180 ÀÌ»ó 183 ÀÌÇÏÀÎ »ç¶÷ÀÇ ¾ÆÀÌµğ, ÀÌ¸§, Å° Á¶È¸ 
+-- í‚¤ 180 ì´ìƒ 183 ì´í•˜ì¸ ì‚¬ëŒì˜ ì•„ì´ë””, ì´ë¦„, í‚¤ ì¡°íšŒ 
 select userID, userName, height from userTbl
 	where height >= 180 and height <= 183;
 
 select userID, userName, height from userTbl
-	where height between 180 and 183; -- between ~ and È°¿ë
+	where height between 180 and 183; -- between ~ and í™œìš©
 
--- Áö¿ªÀÌ °æ³², Àü³², °æºÏÀÎ »ç¶÷ÀÇ Á¤º¸ 
+-- ì§€ì—­ì´ ê²½ë‚¨, ì „ë‚¨, ê²½ë¶ì¸ ì‚¬ëŒì˜ ì •ë³´ 
 select userName, addr from userTbl
-	where addr='°æ³²' or addr='Àü³²' or addr='°æºÏ'; 
+	where addr='ê²½ë‚¨' or addr='ì „ë‚¨' or addr='ê²½ë¶'; 
 
 select userName, addr from userTbl
-	where addr IN('°æ³²', 'Àü³²', '°æºÏ');  -- IN() È°¿ë 
+	where addr IN('ê²½ë‚¨', 'ì „ë‚¨', 'ê²½ë¶');  -- IN() í™œìš© 
 
--- ¼ºÀÌ ±è¾¾ÀÎ »ç¶÷ÀÇ ÀÌ¸§°ú Å° Á¶È¸ 
+-- ì„±ì´ ê¹€ì”¨ì¸ ì‚¬ëŒì˜ ì´ë¦„ê³¼ í‚¤ ì¡°íšŒ 
 select userName, height from userTbl
-	where userName like '±è%';    -- Àü¹üÀ§ 
+	where userName like 'ê¹€%';    -- ì „ë²”ìœ„ 
 
 select userName, height from userTbl
-	where userName like '_Á¾½Å';  -- ÇÑ±ÛÀÚ 
+	where userName like '_ì¢…ì‹ ';  -- í•œê¸€ì 
 
 
--- ¼­ºêÄõ¸® 
+-- ì„œë¸Œì¿¼ë¦¬ 
 select userName, height from userTbl 
 	where height > 177; 
 
 select userName, height from userTbl
-	where height > (select height from userTbl where userName = '±è°æÈ£');
-				-- 177 ´ë½Å¿¡ 'ÀÌ¸§ÀÌ ±è°æÈ£ÀÎ »ç¶÷ÀÇ Å°' ·Î ´ëÃ¼ °¡´É 
+	where height > (select height from userTbl where userName = 'ê¹€ê²½í˜¸');
+				-- 177 ëŒ€ì‹ ì— 'ì´ë¦„ì´ ê¹€ê²½í˜¸ì¸ ì‚¬ëŒì˜ í‚¤' ë¡œ ëŒ€ì²´ ê°€ëŠ¥ 
 
 select userName, height from userTbl
-	where height > any (select height from userTbl where addr = '°æ³²'); 
+	where height > any (select height from userTbl where addr = 'ê²½ë‚¨'); 
 					-- ( > 170 or > 173 ) 
-	-- any(=some) : ¼­ºêÄõ¸®ÀÇ °á°ú°ªÀÌ µÑ ÀÌ»óÀÏ ¶§, or ÀÇ ¿ªÇÒÀ» ¼öÇà 
-	-- [ = ANY (¼­ºêÄõ¸®) ] == [ IN (¼­ºêÄõ¸®) ]
+	-- any(=some) : ì„œë¸Œì¿¼ë¦¬ì˜ ê²°ê³¼ê°’ì´ ë‘˜ ì´ìƒì¼ ë•Œ, or ì˜ ì—­í• ì„ ìˆ˜í–‰ 
+	-- [ = ANY (ì„œë¸Œì¿¼ë¦¬) ] == [ IN (ì„œë¸Œì¿¼ë¦¬) ]
 
 select userName, height from userTbl
-	where height > all (select height from userTbl where addr = '°æ³²'); 
+	where height > all (select height from userTbl where addr = 'ê²½ë‚¨'); 
 					-- ( > 170 and > 173 ) 
-	-- all : ¼­ºêÄõ¸®ÀÇ °á°ú°ªÀÌ µÑ ÀÌ»óÀÏ ¶§, and ÀÇ ¿ªÇÒÀ» ¼öÇà
+	-- all : ì„œë¸Œì¿¼ë¦¬ì˜ ê²°ê³¼ê°’ì´ ë‘˜ ì´ìƒì¼ ë•Œ, and ì˜ ì—­í• ì„ ìˆ˜í–‰
 
 
--- ORDER BY (Á¤·Ä) 
+-- ORDER BY (ì •ë ¬) 
 select userName, mDate from userTbl ORDER BY mDate; 
 
-select userName, mDate from userTbl order by mDate DESC; -- DESC : ³»¸²Â÷¼ø
-select userName, mDate from userTbl order by mDate ASC; -- ASC : ¿À¸§Â÷¼ø(Default) 
+select userName, mDate from userTbl order by mDate DESC; -- DESC : ë‚´ë¦¼ì°¨ìˆœ
+select userName, mDate from userTbl order by mDate ASC; -- ASC : ì˜¤ë¦„ì°¨ìˆœ(Default) 
 
 
--- DISTINCT (Áßº¹ Á¦°Å) 
+-- DISTINCT (ì¤‘ë³µ ì œê±°) 
 select DISTINCT addr from userTbl; 
 
--- TOP(N) : »óÀ§ N°³ Ãâ·Â 
+-- TOP(N) : ìƒìœ„ Nê°œ ì¶œë ¥ 
 select TOP(5) * from userTbl
 	order by mDate desc; 
-	/* N ÀÚ¸®¿¡ µé¾î°¥ ¼ö ÀÖ´Â °Íµé 
-		- ¼ıÀÚ 
-		- º¯¼ö, ¼ö½Ä, ¼­ºêÄõ¸® (count(*)/100) <- ÀüÃ¼ °¹¼öÀÇ 1% 
+	/* N ìë¦¬ì— ë“¤ì–´ê°ˆ ìˆ˜ ìˆëŠ” ê²ƒë“¤ 
+		- ìˆ«ì 
+		- ë³€ìˆ˜, ìˆ˜ì‹, ì„œë¸Œì¿¼ë¦¬ (count(*)/100) <- ì „ì²´ ê°¯ìˆ˜ì˜ 1% 
 		- TOP(N) PERCENT <- N% 
-		- TOP(N) PERCENT WITH TIES <- N% (µ¿ÀÏ °ªÀÌ ÀÖ´Ù¸é °¹¼ö¸¦ ÃÊ°úÇØµµ Ãâ·Â) 
+		- TOP(N) PERCENT WITH TIES <- N% (ë™ì¼ ê°’ì´ ìˆë‹¤ë©´ ê°¯ìˆ˜ë¥¼ ì´ˆê³¼í•´ë„ ì¶œë ¥) 
 	*/ 
 
--- TABLESAMPLE(N PERCENT) : N% »ùÇÃ¸µ (¼ø¼­ ¹«ÀÛÀ§, °³¼ö ±Ù»çÄ¡) 
+-- TABLESAMPLE(N PERCENT) : N% ìƒ˜í”Œë§ (ìˆœì„œ ë¬´ì‘ìœ„, ê°œìˆ˜ ê·¼ì‚¬ì¹˜) 
 select * from userTbl TABLESAMPLE (40 PERCENT);
 
 
 
--- OFFSET / PATCH : ÁöÁ¤ÇÑ ÇàÀÇ ¼ö ¸¸Å­ °Ç³Ê ¶Ú ÈÄ Ãâ·Â 
+-- OFFSET / PATCH : ì§€ì •í•œ í–‰ì˜ ìˆ˜ ë§Œí¼ ê±´ë„ˆ ë›´ í›„ ì¶œë ¥ 
 select userID, userName, birthyear from userTbl
 	order by birthyear  
 
 select userID, userName, birthyear from userTbl
 	order by birthyear 
-	OFFSET 4 ROWS;   -- ¾Õ 4°³Çà »ı·« 
+	OFFSET 4 ROWS;   -- ì• 4ê°œí–‰ ìƒëµ 
 
 select userID, userName, birthyear from userTbl
 	order by birthyear
 	OFFSET 4 rows
-	FETCH NEXT 3 ROWS ONLY; -- ¾Õ 4°³Çà »ı·« ÈÄ 3°³Çà¸¸ Ãâ·Â  
+	FETCH NEXT 3 ROWS ONLY; -- ì• 4ê°œí–‰ ìƒëµ í›„ 3ê°œí–‰ë§Œ ì¶œë ¥  
 
 
 
--- SELECT INTO (Å×ÀÌºí º¹»ç) -> Á¦¾à Á¶°Ç(PK, FK µî) Àº º¹»çµÇÁö ¾ÊÀ½
+-- SELECT INTO (í…Œì´ë¸” ë³µì‚¬) -> ì œì•½ ì¡°ê±´(PK, FK ë“±) ì€ ë³µì‚¬ë˜ì§€ ì•ŠìŒ
 select * into buyTbl2 from buyTbl;
 select * from buyTbl2;
 select userID, prodName into buyTbl3 from buyTbl; 
@@ -103,76 +103,76 @@ select * from buyTbl3;
 
 
 -- GROUP BY 
--- ¹°Ç°º° ÃÑ ±¸¸Å¼ö 
-select userID, SUM(amount) AS [¼ö·®] from buyTbl group by userID;
+-- ë¬¼í’ˆë³„ ì´ êµ¬ë§¤ìˆ˜ 
+select userID, SUM(amount) AS [ìˆ˜ëŸ‰] from buyTbl group by userID;
 
--- Áı°è ÇÔ¼ö 
+-- ì§‘ê³„ í•¨ìˆ˜ 
 
 /*
-	Áı°è ÇÔ¼ö(Çà ÀÌ¸§) AS [ÀÌ¸§] / 'ÀÌ¸§' 
-	AVG() : Æò±Õ 
-	MIN() : ÃÖ¼Ò°ª
-	MAX() : ÃÖ´ë°ª
-	COUNT() : ÇàÀÇ °³¼ö 
-	COUNT_BIG() : ÇàÀÇ °³¼ö (bigint Çü) 
-	STDEV() : Ç¥ÁØÆíÂ÷ 
-	VAR() : ºĞ»ê 
+	ì§‘ê³„ í•¨ìˆ˜(í–‰ ì´ë¦„) AS [ì´ë¦„] / 'ì´ë¦„' 
+	AVG() : í‰ê·  
+	MIN() : ìµœì†Œê°’
+	MAX() : ìµœëŒ€ê°’
+	COUNT() : í–‰ì˜ ê°œìˆ˜ 
+	COUNT_BIG() : í–‰ì˜ ê°œìˆ˜ (bigint í˜•) 
+	STDEV() : í‘œì¤€í¸ì°¨ 
+	VAR() : ë¶„ì‚° 
 */
 
--- Æò±Õ AVG() 
-select avg(amount) as 'Æò±Õ ±¸¸Å °³¼ö' from buyTbl; 
--- ½ÇÁ¦ °á°ú°¡ 2.91 ÀÌÁö¸¸ amount°¡ Á¤¼öÇüÀÌ¹Ç·Î 2°¡ ³ª¿Â´Ù. µû¶ó¼­ ½Ç¼öÇüÀ¸·Î º¯È¯ 
-select avg(amount*1.0) as 'Æò±Õ ±¸¸Å °³¼ö' from buyTbl; 
+-- í‰ê·  AVG() 
+select avg(amount) as 'í‰ê·  êµ¬ë§¤ ê°œìˆ˜' from buyTbl; 
+-- ì‹¤ì œ ê²°ê³¼ê°€ 2.91 ì´ì§€ë§Œ amountê°€ ì •ìˆ˜í˜•ì´ë¯€ë¡œ 2ê°€ ë‚˜ì˜¨ë‹¤. ë”°ë¼ì„œ ì‹¤ìˆ˜í˜•ìœ¼ë¡œ ë³€í™˜ 
+select avg(amount*1.0) as 'í‰ê·  êµ¬ë§¤ ê°œìˆ˜' from buyTbl; 
 
--- °¡Àå Å« Å°¿Í °¡Àå ÀÛÀº Å°ÀÇ È¸¿ø ÀÌ¸§°ú Å°¸¦ Ãâ·Â 
-select userName, max(height), Min(height) from userTbl; -- GROUP BY Àı¿¡ ¾øÀ¸¹Ç·Î ¿À·ù 
+-- ê°€ì¥ í° í‚¤ì™€ ê°€ì¥ ì‘ì€ í‚¤ì˜ íšŒì› ì´ë¦„ê³¼ í‚¤ë¥¼ ì¶œë ¥ 
+select userName, max(height), Min(height) from userTbl; -- GROUP BY ì ˆì— ì—†ìœ¼ë¯€ë¡œ ì˜¤ë¥˜ 
 select userName, max(height), Min(height) from userTbl group by userName; 
--- ±×³É ÀüÃ¼ °á°ú°¡ Ãâ·ÂµÇ¹Ç·Î ¿À·ù
--- ¼­ºê Äõ¸®¸¦ »ç¿ëÇÏ¿© °á°ú Ãâ·Â 
+-- ê·¸ëƒ¥ ì „ì²´ ê²°ê³¼ê°€ ì¶œë ¥ë˜ë¯€ë¡œ ì˜¤ë¥˜
+-- ì„œë¸Œ ì¿¼ë¦¬ë¥¼ ì‚¬ìš©í•˜ì—¬ ê²°ê³¼ ì¶œë ¥ 
 select userName, height from userTbl
 	where height = (select max(height) from userTbl) 
 		or height = (select min(height) from userTbl); 
 
 
--- ÃÑ µ¥ÀÌÅÍ °³¼ö COUNT() 
-select count(*) as 'È¸¿ø' from userTbl; 
-select count(*) as '±¸¸Å³»¿ª' from buyTbl;
--- ÈŞ´ëÆùÀÌ ÀÖ´Â È¸¿ø¸¸ COUNT() 
-select count(mobile1) as 'ÈŞ´ëÆùÀÌ ÀÖ´Â »ç¿ëÀÚ' from userTbl; 
+-- ì´ ë°ì´í„° ê°œìˆ˜ COUNT() 
+select count(*) as 'íšŒì›' from userTbl; 
+select count(*) as 'êµ¬ë§¤ë‚´ì—­' from buyTbl;
+-- íœ´ëŒ€í°ì´ ìˆëŠ” íšŒì›ë§Œ COUNT() 
+select count(mobile1) as 'íœ´ëŒ€í°ì´ ìˆëŠ” ì‚¬ìš©ì' from userTbl; 
 
 
--- Áı°è ÇÔ¼ö + Á¶°Ç     HAVING Àı 
-select userID, sum(price * amount) as '¾ÆÀÌµğº° ±¸¸Å±İ¾×' from buyTbl 
-	-- where sum(price * amount) > 1000    : Áı°è ÇÔ¼ö´Â where Àı¿¡ »ç¿ëÇÒ ¼ö ¾øÀ½ 
+-- ì§‘ê³„ í•¨ìˆ˜ + ì¡°ê±´     HAVING ì ˆ 
+select userID, sum(price * amount) as 'ì•„ì´ë””ë³„ êµ¬ë§¤ê¸ˆì•¡' from buyTbl 
+	-- where sum(price * amount) > 1000    : ì§‘ê³„ í•¨ìˆ˜ëŠ” where ì ˆì— ì‚¬ìš©í•  ìˆ˜ ì—†ìŒ 
 	group by userID
 	having sum(price * amount) > 1000;  
-	-- GROUP BY [Áı°è ´ë»ó] HAVING [Á¶°Ç] ¼ø¼­·Î ÀÛ¼º 
+	-- GROUP BY [ì§‘ê³„ ëŒ€ìƒ] HAVING [ì¡°ê±´] ìˆœì„œë¡œ ì‘ì„± 
 	
-/* ROLLUP() / CUBE()	Áß°£ Áı°è ÇÔ¼ö 
-	ROLLUP() : ±×·ìº° ÃÑÇÕ / ¼ÒÁı°è°¡ ÇÊ¿äÇÑ °æ¿ì (´ÜÀÏ Â÷¿ø)
-	CUBE() : °áÇÕ °¡´ÉÇÑ ¸ğµç °ª¿¡ ´ëÇØ ´ÙÂ÷¿ø Áı°è¸¦ »ı¼º 
-			 Grand Total (ÃÑÁı°è) °¡ ¾çÂÊ Äõ¸®¿¡¼­ ¸ğµÎ »ı¼ºµÇ¹Ç·Î 
-			 1È¸ Á¦°Å ÇÊ¿ä <- ½Ã½ºÅÛ ¿¬»êÀÌ ¸¹À½, Àß ¾È¾¸ 
+/* ROLLUP() / CUBE()	ì¤‘ê°„ ì§‘ê³„ í•¨ìˆ˜ 
+	ROLLUP() : ê·¸ë£¹ë³„ ì´í•© / ì†Œì§‘ê³„ê°€ í•„ìš”í•œ ê²½ìš° (ë‹¨ì¼ ì°¨ì›)
+	CUBE() : ê²°í•© ê°€ëŠ¥í•œ ëª¨ë“  ê°’ì— ëŒ€í•´ ë‹¤ì°¨ì› ì§‘ê³„ë¥¼ ìƒì„± 
+			 Grand Total (ì´ì§‘ê³„) ê°€ ì–‘ìª½ ì¿¼ë¦¬ì—ì„œ ëª¨ë‘ ìƒì„±ë˜ë¯€ë¡œ 
+			 1íšŒ ì œê±° í•„ìš” <- ì‹œìŠ¤í…œ ì—°ì‚°ì´ ë§ìŒ, ì˜ ì•ˆì”€ 
 */ 
 
 
-select num, groupName, sum(price * amount) as 'ºñ¿ë' from buyTbl
+select num, groupName, sum(price * amount) as 'ë¹„ìš©' from buyTbl
 	group by ROLLUP (groupName, num); 
-	-- groupName À» ±âÁØÀ¸·Î Á¤·Ä, ¼ÒÁı°è, ÃÑÁı°è 
-select num, groupName, sum(price * amount) as 'ºñ¿ë' from buyTbl
+	-- groupName ì„ ê¸°ì¤€ìœ¼ë¡œ ì •ë ¬, ì†Œì§‘ê³„, ì´ì§‘ê³„ 
+select num, groupName, sum(price * amount) as 'ë¹„ìš©' from buyTbl
 	group by ROLLUP (num, groupName); 
-	-- num À» ±âÁØÀ¸·Î Á¤·Ä (numÀº ±¸¸Å ³»¿ª PK ÀÌ¹Ç·Î ÀÇ¹Ì ¾øÀ½) 
-select groupName, sum(price * amount) as 'ºñ¿ë' from buyTbl
+	-- num ì„ ê¸°ì¤€ìœ¼ë¡œ ì •ë ¬ (numì€ êµ¬ë§¤ ë‚´ì—­ PK ì´ë¯€ë¡œ ì˜ë¯¸ ì—†ìŒ) 
+select groupName, sum(price * amount) as 'ë¹„ìš©' from buyTbl
 	group by ROLLUP (groupName); 
-	-- ±×·ìÈ­ ÇÏÁö ¾Ê°í ¼ÒÁı°è, ÃÑÁı°è¸¸ Ãâ·Â 
+	-- ê·¸ë£¹í™” í•˜ì§€ ì•Šê³  ì†Œì§‘ê³„, ì´ì§‘ê³„ë§Œ ì¶œë ¥ 
 	
 
--- WITH Àı : CTE¸¦ Ç¥ÇöÇÏ±â À§ÇÑ ±¸¹® 
+-- WITH ì ˆ : CTEë¥¼ í‘œí˜„í•˜ê¸° ìœ„í•œ êµ¬ë¬¸ 
 -- CTE : ? 
--- ºñÀç±ÍÀû CTE / Àç±ÍÀû CTE ·Î ³ª´¸ 
+-- ë¹„ì¬ê·€ì  CTE / ì¬ê·€ì  CTE ë¡œ ë‚˜ë‰¨ 
 
--- ºñÀç±ÍÀû CTE 
-with cte_tmp(userID, total) -- totalÀ» sum(price * amount) ·Î Ä¡È¯ 
+-- ë¹„ì¬ê·€ì  CTE 
+with cte_tmp(userID, total) -- totalì„ sum(price * amount) ë¡œ ì¹˜í™˜ 
 as ( 
 	select userID, sum(price * amount) as 'total' 
 		from buyTbl
@@ -184,5 +184,5 @@ select userID, sum(price * amount) as 'total'
 	from buyTbl
 	group by userID
 	order by sum(price * amount) desc; 
-	-- userID ¿Í ÇÕ°è¸¦ Ãâ·Â / userID ·Î ±×·ìÈ­, ±¸¸ÅÃÑ¾× ³»¸²Â÷¼øÀ¸·Î Á¤·Ä 
+	-- userID ì™€ í•©ê³„ë¥¼ ì¶œë ¥ / userID ë¡œ ê·¸ë£¹í™”, êµ¬ë§¤ì´ì•¡ ë‚´ë¦¼ì°¨ìˆœìœ¼ë¡œ ì •ë ¬ 
 

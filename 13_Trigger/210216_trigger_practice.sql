@@ -1,4 +1,4 @@
-use sqlDB;
+ï»¿use sqlDB;
 go
 
 create trigger trg_backupUsertbl 
@@ -8,13 +8,13 @@ after update, delete
 as
 	declare @modType nchar(2);
 	
-	if (COLUMNS_UPDATED()>0) -- ¾÷µ¥ÀÌÆ®
+	if (COLUMNS_UPDATED()>0) -- ì—…ë°ì´íŠ¸
 	begin	
-		set @modType = '¼öÁ¤';
+		set @modType = 'ìˆ˜ì •';
 	end 
-	else -- »èÁ¦ 
+	else -- ì‚­ì œ 
 	begin 
-		set @modType = '»èÁ¦'; 
+		set @modType = 'ì‚­ì œ'; 
 	end 
 
 	insert into backup_userTbl 

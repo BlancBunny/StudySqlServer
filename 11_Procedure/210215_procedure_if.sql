@@ -1,4 +1,4 @@
-use sqlDB;
+ï»¿use sqlDB;
 GO
 
 create or alter procedure usp_ifElse
@@ -10,12 +10,12 @@ as
 
 	if(@birthyear >= 1970)
 		begin
-			print '¾ÆÁ÷ Àş±º¿ä...'
+			print 'ì•„ì§ ì Šêµ°ìš”...'
 		end
 	else begin
-			print '³ªÀÌ°¡ Áö±ßÇÏ³×¿ä...'
+			print 'ë‚˜ì´ê°€ ì§€ê¸‹í•˜ë„¤ìš”...'
 		end
 
 go
 
-exec usp_ifElse 'Á¶¿ëÇÊ';
+exec usp_ifElse 'ì¡°ìš©í•„';

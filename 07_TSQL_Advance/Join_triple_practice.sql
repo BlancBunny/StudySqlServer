@@ -1,4 +1,4 @@
-USE sqlDB;
+ï»¿USE sqlDB;
 go 
 
 create table stdTbl (
@@ -25,7 +25,7 @@ select * from stdTbl;
 select * from clubTbl;
 select * from stdclubTbl;
 
--- ÀÌ¸§, Áö¿ª, °¡ÀÔÇÑ µ¿¾Æ¸®, µ¿¾Æ¸®½Ç 
+-- ì´ë¦„, ì§€ì—­, ê°€ìž…í•œ ë™ì•„ë¦¬, ë™ì•„ë¦¬ì‹¤ 
 
 -- INNER JOIN 
 select S.stdName, S.addr, C.clubName, C.roomNo from stdTbl S
@@ -39,14 +39,14 @@ select C.clubName, S.stdName, S.addr, C.roomNo from stdTbl S
 	order by C.clubName;
 
 -- OUTER JOIN
-select U.userID, U.userName, B.prodName, U.addr, U.mobile1 + U.mobile2 AS [¿¬¶ôÃ³] 
-	from userTbl U LEFT OUTER JOIN buyTbl B  -- ±¸¸Å±â·ÏÀ» º»´Ù (¿ÞÂÊ Å×ÀÌºí[userTbl] ÀÇ ÀüÃ¼³»¿ë Æ÷ÇÔ) 
-		ON U.userID = B.userID		--> ±¸¸Å³»¿ªÀÌ ¾ø´Â '»ç¿ëÀÚ'µµ Æ÷ÇÔÇÏ¿© ³»¿ë Ãâ·Â 
+select U.userID, U.userName, B.prodName, U.addr, U.mobile1 + U.mobile2 AS [ì—°ë½ì²˜] 
+	from userTbl U LEFT OUTER JOIN buyTbl B  -- êµ¬ë§¤ê¸°ë¡ì„ ë³¸ë‹¤ (ì™¼ìª½ í…Œì´ë¸”[userTbl] ì˜ ì „ì²´ë‚´ìš© í¬í•¨) 
+		ON U.userID = B.userID		--> êµ¬ë§¤ë‚´ì—­ì´ ì—†ëŠ” 'ì‚¬ìš©ìž'ë„ í¬í•¨í•˜ì—¬ ë‚´ìš© ì¶œë ¥ 
 	ORDER BY U.userID;
 
-select B.prodName, U.userID, U.userName, U.addr, U.mobile1 + U.mobile2 AS [¿¬¶ôÃ³] 
-	from userTbl U RIGHT OUTER JOIN buyTbl B  -- ±¸¸Å±â·ÏÀ» º»´Ù (¿À¸¥ÂÊ Å×ÀÌºí[buyTbl] ÀÇ ÀüÃ¼³»¿ë Æ÷ÇÔ) 
-		ON U.userID = B.userID		--> ±¸¸Å³»¿ªÀÌ ¾ø´Â '¹°Ç°'µµ Æ÷ÇÔÇÏ¿© ³»¿ë Ãâ·Â 
+select B.prodName, U.userID, U.userName, U.addr, U.mobile1 + U.mobile2 AS [ì—°ë½ì²˜] 
+	from userTbl U RIGHT OUTER JOIN buyTbl B  -- êµ¬ë§¤ê¸°ë¡ì„ ë³¸ë‹¤ (ì˜¤ë¥¸ìª½ í…Œì´ë¸”[buyTbl] ì˜ ì „ì²´ë‚´ìš© í¬í•¨) 
+		ON U.userID = B.userID		--> êµ¬ë§¤ë‚´ì—­ì´ ì—†ëŠ” 'ë¬¼í’ˆ'ë„ í¬í•¨í•˜ì—¬ ë‚´ìš© ì¶œë ¥ 
 	ORDER BY B.prodName;
 
 

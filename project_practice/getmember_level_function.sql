@@ -1,15 +1,15 @@
--- »ç¿ëÀÚ ·¹º§ ¸®ÅÏ ÇÔ¼ö 
+ï»¿-- ì‚¬ìš©ì ë ˆë²¨ ë¦¬í„´ í•¨ìˆ˜ 
 create or alter function dbo.ufn_getMemLevel(@levels char(1))
 returns nvarchar(5)
 as
 begin
 	declare @result nvarchar(5); 
 	set @result = case @levels
-		when 'A' then  'ÇÃ·¡Æ¼³Ñ'
-		when 'B' then  '°ñµå'
-		when 'C' then  '½Ç¹ö'
-		when 'D' then  'ºê·ĞÁî' 
-		else 'ºñÈ¸¿ø' 
+		when 'A' then  'í”Œë˜í‹°ë„˜'
+		when 'B' then  'ê³¨ë“œ'
+		when 'C' then  'ì‹¤ë²„'
+		when 'D' then  'ë¸Œë¡ ì¦ˆ' 
+		else 'ë¹„íšŒì›' 
 	end;
 	return @result;                                                                                                                                                                                             
 end

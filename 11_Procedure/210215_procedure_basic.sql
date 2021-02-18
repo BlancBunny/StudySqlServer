@@ -1,4 +1,4 @@
-use sqlDB;
+ï»¿use sqlDB;
 go
 
 create procedure usp_users
@@ -11,7 +11,7 @@ as
 	select userID, userName, birthyear from userTBL;
 go 
 
-create or alter procedure usp_users -- ¾ê¸¦ Á¦ÀÏ ¸¹ÀÌ ¾¸
+create or alter procedure usp_users -- ì–˜ë¥¼ ì œì¼ ë§ì´ ì”€
 as 
 	select userID, userName, birthyear from userTBL;
 go 
@@ -21,7 +21,7 @@ go
 create or alter procedure usp_buyproduct
 	@userID char(8)
 as
-	select num, userID, prodName, (price * amount) as '±¸¸Å±İ¾×' 
+	select num, userID, prodName, (price * amount) as 'êµ¬ë§¤ê¸ˆì•¡' 
 	from buyTbl
 	where userID = @userID;
 go

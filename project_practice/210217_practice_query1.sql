@@ -1,40 +1,40 @@
-use BookRentalShopDB;
+ï»¿use BookRentalShopDB;
 go
 
--- È¸¿øÁ¤º¸ ºÒ·¯¿À±â (ÀÌ¸§¼ø) 
+-- íšŒì›ì •ë³´ ë¶ˆëŸ¬ì˜¤ê¸° (ì´ë¦„ìˆœ) 
 select memberID, memberName, levels, mobile, email from memberTBL
 	where levels <> 'S'
 	order by levels desc, memberName;
 
--- Ã¥Á¤º¸
+-- ì±…ì •ë³´
 select cate_idx, bookTitle, bookAuthor, 
 	interpreter, company, price
 	from booksTBL
 	order by price desc;
 
--- ½Ã½ºÅÛ ÇÔ¼ö»ç¿ë Äõ¸® 
+-- ì‹œìŠ¤í…œ í•¨ìˆ˜ì‚¬ìš© ì¿¼ë¦¬ 
 select	memberID, 
-		concat(right(memberName, 2), ' ', left(memberName, 1)) as '¹Ì±¹½ÄÀÌ¸§',
-		dbo.ufn_getMemLevel(levels) as 'È¸¿øµî±Ş',		
+		concat(right(memberName, 2), ' ', left(memberName, 1)) as 'ë¯¸êµ­ì‹ì´ë¦„',
+		dbo.ufn_getMemLevel(levels) as 'íšŒì›ë“±ê¸‰',		
 		mobile, 
-		upper(email) as 'ÀÌ¸ŞÀÏ'
+		upper(email) as 'ì´ë©”ì¼'
 	from memberTBL
 	where levels <> 'S'
 		order by memberName;
 
--- Ã¥ Á¤º¸, ½Ã½ºÅÛ ÇÔ¼ö, Æ÷¸Ë ÇÔ¼ö Äõ¸®
+-- ì±… ì •ë³´, ì‹œìŠ¤í…œ í•¨ìˆ˜, í¬ë§· í•¨ìˆ˜ ì¿¼ë¦¬
 SELECT book_idx
 	,cate_idx
-	,concat (N'Ã¥Á¦¸ñ >', bookTitle) as bookTitle 
+	,concat (N'ì±…ì œëª© >', bookTitle) as bookTitle 
 	,bookAuthor
-	,isnull(interpreter, '¿ªÀÚ ¾øÀ½') as 'interpreter'
+	,isnull(interpreter, 'ì—­ì ì—†ìŒ') as 'interpreter'
     ,company
-	,format(releaseDate, 'yyyy³â MM¿ù ddÀÏ') as 'releaseDate'
-    ,format(price, '#,#¿ø') as '°¡°İ' 
+	,format(releaseDate, 'yyyyë…„ MMì›” ddì¼') as 'releaseDate'
+    ,format(price, '#,#ì›') as 'ê°€ê²©' 
   FROM booksTBL
 
 
--- Ã¥Á¤º¸ JOIN 
+-- ì±…ì •ë³´ JOIN 
 USE BookRentalShopDB
 GO
 
@@ -50,19 +50,20 @@ SELECT b.book_idx
 		on b.cate_idx = c.cate_idx;
 
 
--- ´ë¿©µÈ Ã¥ÀÇ Á¤º¸	
+-- ëŒ€ì—¬ëœ ì±…ì˜ ì •ë³´	
 SELECT r.rental_idx
 	  ,m.memberName
 	  ,b.bookTitle
-      ,format(r.rentalDate, 'yyyy-MM-dd') as ´ë¿©ÀÏ
-	  ,dbo.ufn_getState(r.rentalState) as ºñ°í
+      ,format(r.rentalDate, 'yyyy-MM-dd') as ëŒ€ì—¬ì¼
+	  ,dbo.ufn_getState(r.rentalState) as ë¹„ê³ 
 	FROM rentalTBL as r 
 		right outer join memberTBL as m
 		on r.member_idx = m.member_idx
-		right outer join booksTBL as b 
+		left outer join booksTBL as b 
 		on r.book_idx = b.book_idx
 		where r.rental_idx is null;
 		
 GO
 
--- ÆíÁı - intellisense - ·ÎÄÃ Ä³½Ã »õ·Î°íÄ§ (Ctrl + shift + R)
+
+

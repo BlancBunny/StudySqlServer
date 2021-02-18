@@ -1,9 +1,9 @@
-use tableDB;
+ï»¿use tableDB;
 go
 
 create table #tempTbl (id int, txt nvarchar(10));
 create table ##tempTbl (id int, txt nvarchar(10));
 go
-insert into #tempTbl values (1, 'Áö¿ªÀÓ½ÃÅ×ÀÌºí');
-insert into ##tempTbl values (2, 'Àü¿ªÀÓ½ÃÅ×ÀÌºí');
+insert into #tempTbl values (1, 'ì§€ì—­ì„ì‹œí…Œì´ë¸”');
+insert into ##tempTbl values (2, 'ì „ì—­ì„ì‹œí…Œì´ë¸”');
 go

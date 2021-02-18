@@ -1,8 +1,8 @@
--- update 
+ï»¿-- update 
 select * from testTbl;
 
 update testTbl
-	set userName = '¼º¼ö°æ', 
+	set userName = 'ì„±ìˆ˜ê²½', 
 		age = 30; 
 	-- where id = 6;
 

@@ -1,4 +1,4 @@
-use sqlDB;
+ï»¿use sqlDB;
 go
 
 create or alter proc usp_return
@@ -8,14 +8,14 @@ as
 	select @userID = userID from userTbl
 					where userName = @userName;
 	if (@userID <> '') 
-		return 0; -- ¼º°ø
+		return 0; -- ì„±ê³µ
 	else return -1;
 go
 
 declare @retVal int;
-exec @retVal=usp_return 'ÀÌ½Â±â';
+exec @retVal=usp_return 'ì´ìŠ¹ê¸°';
 select @retVal;
 
 
-exec @retVal=usp_return '³ª½Â±â';
+exec @retVal=usp_return 'ë‚˜ìŠ¹ê¸°';
 select @retVal;

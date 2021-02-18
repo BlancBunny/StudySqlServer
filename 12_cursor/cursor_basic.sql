@@ -1,4 +1,4 @@
-use sqlDB;
+ï»¿use sqlDB;
 go 
 
 declare cur_usertbl	cursor global
@@ -6,23 +6,23 @@ declare cur_usertbl	cursor global
 
 open cur_usertbl;
 
-declare @userName nchar(8); -- È¸¿ø ÀÌ¸§
-declare @height smallint; -- È¸¿øÀÇ Å° 
-declare @cnt int = 0;	  -- È¸¿ø¼ö(ÀĞÀº Çà¼ö)
-declare @totalheight int = 0; -- È¸¿ø Å°ÀÇ ÇÕ°è 
+declare @userName nchar(8); -- íšŒì› ì´ë¦„
+declare @height smallint; -- íšŒì›ì˜ í‚¤ 
+declare @cnt int = 0;	  -- íšŒì›ìˆ˜(ì½ì€ í–‰ìˆ˜)
+declare @totalheight int = 0; -- íšŒì› í‚¤ì˜ í•©ê³„ 
 
-fetch next from cur_usertbl into @userName ,@height; -- Ä¿¼­ °ª ÀĞ¾î¼­ º¯¼ö¿¡ ÇÒ´ç
+fetch next from cur_usertbl into @userName ,@height; -- ì»¤ì„œ ê°’ ì½ì–´ì„œ ë³€ìˆ˜ì— í• ë‹¹
 
--- ¹İº¹¹® ½ÃÀÛ
+-- ë°˜ë³µë¬¸ ì‹œì‘
 while @@FETCH_STATUS = 0
 begin
 	set @cnt += 1 
 	set @totalheight += @height
 	fetch next from cur_usertbl into @userName, @height; 
-	print concat(@username, 'È¸¿ø´ÔÀÇ ½ÅÀåÀº ', @height, 'ÀÔ´Ï´Ù.');
+	print concat(@username, 'íšŒì›ë‹˜ì˜ ì‹ ì¥ì€ ', @height, 'ì…ë‹ˆë‹¤.');
 end 
 
-print '°í°´ Å°ÀÇ Æò±Õ = ' + CAST(@totalheight/@cnt as char(10));
+print 'ê³ ê° í‚¤ì˜ í‰ê·  = ' + CAST(@totalheight/@cnt as char(10));
 
 close cur_usertbl;
 deallocate cur_usertbl;

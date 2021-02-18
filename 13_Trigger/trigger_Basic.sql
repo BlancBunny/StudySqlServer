@@ -1,13 +1,13 @@
-use sqlDB;
+ï»¿use sqlDB;
 go
 
 create trigger testTrg -- create : DDL (Data Definition Language) 
 on testtbl
-after delete, update -- »èÁ¦, ¼öÁ¤¿¡¼­ Æ®¸®°Å ¹ß»ı 
+after delete, update -- ì‚­ì œ, ìˆ˜ì •ì—ì„œ íŠ¸ë¦¬ê±° ë°œìƒ 
 as
-	print 'Æ®¸®°Å ¹ß»ı'; 
+	print 'íŠ¸ë¦¬ê±° ë°œìƒ'; 
 
-insert into testtbl values ('¸¶¸¶¹«');
+insert into testtbl values ('ë§ˆë§ˆë¬´');
 select * from testtbl;
-update testtbl set txt = '¸¶¸¶¹«´º!' where id = 1;
+update testtbl set txt = 'ë§ˆë§ˆë¬´ë‰´!' where id = 1;
 delete testtbl where id = 1;

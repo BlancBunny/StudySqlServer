@@ -1,4 +1,4 @@
-use tempdb;
+ï»¿use tempdb;
 go
  
 create table bankbook (
@@ -8,41 +8,41 @@ create table bankbook (
 );
 go
 
-insert into bankbook values (N'±¸¸ÅÀÚ', 1000);
-insert into bankbook values (N'ÆÇ¸ÅÀÚ', 0);
+insert into bankbook values (N'êµ¬ë§¤ì', 1000);
+insert into bankbook values (N'íŒë§¤ì', 0);
 
 select * from bankbook;
 
-update bankbook set uMoney = uMoney - 500 where uName = N'±¸¸ÅÀÚ';
-update bankbook set uMoney = uMoney + 500 where uName = N'ÆÇ¸ÅÀÚ';
---±¸¸ÅÀÚ°¡ ÆÇ¸ÅÀÚ¿¡°Ô 500¿ø ¼Û±İ
+update bankbook set uMoney = uMoney - 500 where uName = N'êµ¬ë§¤ì';
+update bankbook set uMoney = uMoney + 500 where uName = N'íŒë§¤ì';
+--êµ¬ë§¤ìê°€ íŒë§¤ìì—ê²Œ 500ì› ì†¡ê¸ˆ
 select * from bankbook;
 
-update bankbook set uMoney = uMoney - 600 where uName = N'±¸¸ÅÀÚ';
-update bankbook set uMoney = uMoney + 600 where uName = N'ÆÇ¸ÅÀÚ';
--- µ¶¸³ÀûÀÎ Æ®·£Àè¼Ç ¼öÇàÀ¸·Î 2¹ø update Äõ¸®¸¸ ½ÇÇà
--- 1¹ø Äõ¸®´Â check Á¦¾à Á¶°ÇÀ¸·Î ÀÎÇØ ¿À·ù ¹ß»ı (ÀÜ°í°¡ 0¿ø ¹Ì¸¸À¸·Î ³»·Á°¥¼ö ¾øÀ½)
+update bankbook set uMoney = uMoney - 600 where uName = N'êµ¬ë§¤ì';
+update bankbook set uMoney = uMoney + 600 where uName = N'íŒë§¤ì';
+-- ë…ë¦½ì ì¸ íŠ¸ëœì­ì…˜ ìˆ˜í–‰ìœ¼ë¡œ 2ë²ˆ update ì¿¼ë¦¬ë§Œ ì‹¤í–‰
+-- 1ë²ˆ ì¿¼ë¦¬ëŠ” check ì œì•½ ì¡°ê±´ìœ¼ë¡œ ì¸í•´ ì˜¤ë¥˜ ë°œìƒ (ì”ê³ ê°€ 0ì› ë¯¸ë§Œìœ¼ë¡œ ë‚´ë ¤ê°ˆìˆ˜ ì—†ìŒ)
 select * from bankbook; 
 
-update bankbook set uMoney = uMoney - 600 where uName = N'ÆÇ¸ÅÀÚ';
--- º¹±¸ 
+update bankbook set uMoney = uMoney - 600 where uName = N'íŒë§¤ì';
+-- ë³µêµ¬ 
 select * from bankbook; 
 
 begin tran 
-	update bankbook set uMoney = uMoney - 600 where uName = N'±¸¸ÅÀÚ';
-	update bankbook set uMoney = uMoney + 600 where uName = N'ÆÇ¸ÅÀÚ';
+	update bankbook set uMoney = uMoney - 600 where uName = N'êµ¬ë§¤ì';
+	update bankbook set uMoney = uMoney + 600 where uName = N'íŒë§¤ì';
 commit tran 
 select * from bankbook; 
--- ÀÇµµÇÑ °á°ú¿Í ´Ù¸§ (check Á¦¾àÁ¶°ÇÀÇ ³í¸®Àû ¿À·ù´Â ·Ñ¹éµÇÁö ¾ÊÀ½) 
+-- ì˜ë„í•œ ê²°ê³¼ì™€ ë‹¤ë¦„ (check ì œì•½ì¡°ê±´ì˜ ë…¼ë¦¬ì  ì˜¤ë¥˜ëŠ” ë¡¤ë°±ë˜ì§€ ì•ŠìŒ) 
 
-update bankbook set uMoney = uMoney - 600 where uName = N'ÆÇ¸ÅÀÚ';
--- º¹±¸ 
+update bankbook set uMoney = uMoney - 600 where uName = N'íŒë§¤ì';
+-- ë³µêµ¬ 
 select * from bankbook; 
 
 begin try
 	begin tran
-		update bankbook set uMoney = uMoney - 600 where uName = N'±¸¸ÅÀÚ';
-		update bankbook set uMoney = uMoney + 600 where uName = N'ÆÇ¸ÅÀÚ';
+		update bankbook set uMoney = uMoney - 600 where uName = N'êµ¬ë§¤ì';
+		update bankbook set uMoney = uMoney + 600 where uName = N'íŒë§¤ì';
 	commit tran
 end try
 begin catch

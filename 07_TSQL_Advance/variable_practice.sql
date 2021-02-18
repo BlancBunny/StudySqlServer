@@ -1,4 +1,4 @@
-select customer_id, first_name, last_name, phone, email, street, city, state, zip_code
+ï»¿select customer_id, first_name, last_name, phone, email, street, city, state, zip_code
 	from BikeStores.sales.customers
 	where last_name like 'S%' 
 		and state = 'NY' 
@@ -15,7 +15,7 @@ declare @myVar4 CHAR(20);
 SET @myVar1 = 512315;
 SET @myVar2 = 3;
 SET @myVar3 = 4.25;
-SET @myVar4 = '°¡¼ö ÀÌ¸§==>';
+SET @myVar4 = 'ê°€ìˆ˜ ì´ë¦„==>';
 
 select @myVar1;
 select @myVar2+@myVar3;
@@ -27,66 +27,66 @@ set @myVar5 = 3;
 select top(@myvar5) userName, height from userTbl order by height desc; 
 
 select * from buyTbl;
--- Æò±Õ ±¸¸Å °³¼ö 
-select AVG( convert(float, amount) ) as 'Æò±Õ ±¸¸Å °³¼ö' from buyTbl; 
+-- í‰ê·  êµ¬ë§¤ ê°œìˆ˜ 
+select AVG( convert(float, amount) ) as 'í‰ê·  êµ¬ë§¤ ê°œìˆ˜' from buyTbl; 
 
 
-select PARSE('2021³â 2¿ù 39ÀÏ' as date);
-select try_PARSE('2021³â 2¿ù 39ÀÏ' as date);
+select PARSE('2021ë…„ 2ì›” 39ì¼' as date);
+select try_PARSE('2021ë…„ 2ì›” 39ì¼' as date);
 
 select parse('123.45' as float);
 
-select GETDATE() as 'ÇöÀç ³¯Â¥';
+select GETDATE() as 'í˜„ì¬ ë‚ ì§œ';
 
-select year(getdate()) as '±İ³â'; 
+select year(getdate()) as 'ê¸ˆë…„'; 
 
 select abs(-190); 
 
-select round(1234.5678, 2); -- ¼Ò¼öÁ¡ nÀÚ¸®±îÁö Ç¥±â (À½¼öµµ °¡´É) 
+select round(1234.5678, 2); -- ì†Œìˆ˜ì  nìë¦¬ê¹Œì§€ í‘œê¸° (ìŒìˆ˜ë„ ê°€ëŠ¥) 
 
-select iif(200 < 100, 'Âü', '°ÅÁş') -- »ïÇ× ¿¬»êÀÚ 
+select iif(200 < 100, 'ì°¸', 'ê±°ì§“') -- ì‚¼í•­ ì—°ì‚°ì 
 
---¹®ÀÚ¿­ÇÔ¼ö 
+--ë¬¸ìì—´í•¨ìˆ˜ 
 select ascii('a'), ascii('A'); 
 select char(97), char(65); 
-select UNICODE('°¡'), UNICODE('´Ù'); 
+select UNICODE('ê°€'), UNICODE('ë‹¤'); 
 select nchar(44032); 
 
--- ¸¹ÀÌ ¾²ÀÓ -- 
+-- ë§ì´ ì“°ì„ -- 
 
--- ¹®ÀÚ¿­ °áÇÕ 
+-- ë¬¸ìì—´ ê²°í•© 
 select concat('SQL ', 'Server ', 2019); 
--- ¹®ÀÚ¿­ ½ÃÀÛÀ§Ä¡ ¸®ÅÏ
+-- ë¬¸ìì—´ ì‹œì‘ìœ„ì¹˜ ë¦¬í„´
 select charindex('Server', 'SQL Server 2019');
 -- left, right
 select left('SQL Server 2019', 5), right('SQL Server 2019', 6); 
 
 
-select substring('Hello World!', 7, 5); -- 7¹øÂ°ºÎÅÍ 5°³ÀÇ ¹®ÀÚ [7,8,9,10,11]
-select substring('¾È³çÇÏ¼¼¿ä, SQL¼­¹öÀÔ´Ï´Ù!', 11, 2); -- 11¹øÂ°ºÎÅÍ 2°³ÀÇ ¹®ÀÚ [11,12] 
+select substring('Hello World!', 7, 5); -- 7ë²ˆì§¸ë¶€í„° 5ê°œì˜ ë¬¸ì [7,8,9,10,11]
+select substring('ì•ˆë…•í•˜ì„¸ìš”, SQLì„œë²„ì…ë‹ˆë‹¤!', 11, 2); -- 11ë²ˆì§¸ë¶€í„° 2ê°œì˜ ë¬¸ì [11,12] 
 
-select len('¾È³çÇÏ¼¼¿ä'), len('Hello World!');
+select len('ì•ˆë…•í•˜ì„¸ìš”'), len('Hello World!');
 select lower('abcdefG'), upper('AabbasdqQQSA');
 
--- °ø¹é Á¦°Å (L / R / LR) 
+-- ê³µë°± ì œê±° (L / R / LR) 
 select ltrim('     Hello World!     ');
 select rtrim('     Hello World!     ');
 select trim ('     Hello World!     ');
 
--- ±ÛÀÚ ¹Ù²Ù±â replace(A, B, C) A ¹®ÀÚ¿­¿¡ Æ÷ÇÔµÈ B ¹®ÀÚ¿­À» C ¹®ÀÚ¿­·Î Ä¡È¯ 
-select replace('(2016³â ¹ßÇ¥) SQL Server 2016', '2016', '2019'); 
+-- ê¸€ì ë°”ê¾¸ê¸° replace(A, B, C) A ë¬¸ìì—´ì— í¬í•¨ëœ B ë¬¸ìì—´ì„ C ë¬¸ìì—´ë¡œ ì¹˜í™˜ 
+select replace('(2016ë…„ ë°œí‘œ) SQL Server 2016', '2016', '2019'); 
 
--- ¹®ÀÚ¿­ Æ÷¸Ë ÁöÁ¤ 
+-- ë¬¸ìì—´ í¬ë§· ì§€ì • 
 
-select format(getdate(), 'yy/MM/dd'); -- ±âº» 
+select format(getdate(), 'yy/MM/dd'); -- ê¸°ë³¸ 
 /*
-	³¯Â¥ Æ÷¸Ë 
-	yy / yyyy : ³âµµ 
-	MM : ¿ù (MONTH) 
-	dd : ÀÏ 
-	hh : ½Ã 
-	mm : ºĞ (¿ù°ú ±¸ºĞ, minute) 
-	ss : ÃÊ 
+	ë‚ ì§œ í¬ë§· 
+	yy / yyyy : ë…„ë„ 
+	MM : ì›” (MONTH) 
+	dd : ì¼ 
+	hh : ì‹œ 
+	mm : ë¶„ (ì›”ê³¼ êµ¬ë¶„, minute) 
+	ss : ì´ˆ 
 */
 
 

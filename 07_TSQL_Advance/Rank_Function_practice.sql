@@ -1,24 +1,24 @@
-use sqlDB;
+ï»¿use sqlDB;
 go
 
-/*	¼øÀ§ ÇÔ¼ö 
--Çü½Ä-
-<¼øÀ§ÇÔ¼öÀÌ¸§>() OVER(
-	[PARTITION BY <partition_by_list>]  -> ±âÁØ Á¤ÇÏ±â 
-	ORDER BY <order_by_list>)			-> ¼øÀ§ ¸Å±â±â (1µî)
-										=> ±âÁØ º° ¼øÀ§ ¸Å±â±â (~~Áß¿¡¼­ 1µî) 
+/*	ìˆœìœ„ í•¨ìˆ˜ 
+-í˜•ì‹-
+<ìˆœìœ„í•¨ìˆ˜ì´ë¦„>() OVER(
+	[PARTITION BY <partition_by_list>]  -> ê¸°ì¤€ ì •í•˜ê¸° 
+	ORDER BY <order_by_list>)			-> ìˆœìœ„ ë§¤ê¸°ê¸° (1ë“±)
+										=> ê¸°ì¤€ ë³„ ìˆœìœ„ ë§¤ê¸°ê¸° (~~ì¤‘ì—ì„œ 1ë“±) 
 	*/
 
-select ROW_NUMBER() over(order by height desc, userName asc)[Å°Å«¼øÀ§], userName, addr, height
+select ROW_NUMBER() over(order by height desc, userName asc)[í‚¤í°ìˆœìœ„], userName, addr, height
 	from userTbl; 
-								--ÁÖ¼Ò º°·Î		 -- Å° ¼øÀ¸·Î       -- °¡³ª´Ù ¼øÀ¸·Î 
-select addr, ROW_NUMBER() over(partition by addr order by height desc, username asc)[Áö¿ªº°Å°¼øÀ§],
+								--ì£¼ì†Œ ë³„ë¡œ		 -- í‚¤ ìˆœìœ¼ë¡œ       -- ê°€ë‚˜ë‹¤ ìˆœìœ¼ë¡œ 
+select addr, ROW_NUMBER() over(partition by addr order by height desc, username asc)[ì§€ì—­ë³„í‚¤ìˆœìœ„],
 	userName, height from userTbl;
 
 -- 1, 2, 2, 3, 4, ... 
-select DENSE_RANK() over(order by height desc)[Å°Å«¼øÀ§], userName, addr, height
+select DENSE_RANK() over(order by height desc)[í‚¤í°ìˆœìœ„], userName, addr, height
 	from userTbl;
 -- 1, 2, 2, 4, 5, ... 
-select RANK() over(order by height desc)[Å°Å«¼øÀ§], userName, addr, height
+select RANK() over(order by height desc)[í‚¤í°ìˆœìœ„], userName, addr, height
 	from userTbl;
 

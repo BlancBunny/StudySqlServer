@@ -1,36 +1,36 @@
-use sqlDB;
+ï»¿use sqlDB;
 go 
 
--- ÀÌ¸§ÀÌ ±è°æÈ£ÀÎ »ç¶÷ÀÇ ¸ğµç Á¤º¸ Á¶È¸ 
+-- ì´ë¦„ì´ ê¹€ê²½í˜¸ì¸ ì‚¬ëŒì˜ ëª¨ë“  ì •ë³´ ì¡°íšŒ 
 select * from userTbl
-  	where userName='±è°æÈ£';
+  	where userName='ê¹€ê²½í˜¸';
 
--- 1970³â ÀÌÈÄ Ãâ»ıÀÌ¸é¼­, Å° 182 ÀÌ»óÀÎ »ç¶÷ÀÇ ¾ÆÀÌµğ¿Í ÀÌ¸§ Á¶È¸ 
+-- 1970ë…„ ì´í›„ ì¶œìƒì´ë©´ì„œ, í‚¤ 182 ì´ìƒì¸ ì‚¬ëŒì˜ ì•„ì´ë””ì™€ ì´ë¦„ ì¡°íšŒ 
 select userID, userName from userTbl
 	where birthyear >= 1970 and height >= 182; 
 
--- 1970³â ÀÌÈÄ Ãâ»ıÀÌ°Å³ª, Å° 182 ÀÌ»óÀÎ »ç¶÷ÀÇ ¾ÆÀÌµğ¿Í ÀÌ¸§ Á¶È¸ 
+-- 1970ë…„ ì´í›„ ì¶œìƒì´ê±°ë‚˜, í‚¤ 182 ì´ìƒì¸ ì‚¬ëŒì˜ ì•„ì´ë””ì™€ ì´ë¦„ ì¡°íšŒ 
 select userID, userName from userTbl
 	where birthyear >= 1970 or height >= 182; 
 
--- Å° 180 ÀÌ»ó 183 ÀÌÇÏÀÎ »ç¶÷ÀÇ ¾ÆÀÌµğ, ÀÌ¸§, Å° Á¶È¸ 
+-- í‚¤ 180 ì´ìƒ 183 ì´í•˜ì¸ ì‚¬ëŒì˜ ì•„ì´ë””, ì´ë¦„, í‚¤ ì¡°íšŒ 
 select userID, userName, height from userTbl
 	where height >= 180 and height <= 183;
 
 select userID, userName, height from userTbl
-	where height between 180 and 183; -- between ~ and È°¿ë
+	where height between 180 and 183; -- between ~ and í™œìš©
 
--- Áö¿ªÀÌ °æ³², Àü³², °æºÏÀÎ »ç¶÷ÀÇ Á¤º¸ 
+-- ì§€ì—­ì´ ê²½ë‚¨, ì „ë‚¨, ê²½ë¶ì¸ ì‚¬ëŒì˜ ì •ë³´ 
 select userName, addr from userTbl
-	where addr='°æ³²' or addr='Àü³²' or addr='°æºÏ'; 
+	where addr='ê²½ë‚¨' or addr='ì „ë‚¨' or addr='ê²½ë¶'; 
 
 select userName, addr from userTbl
-	where addr IN('°æ³²', 'Àü³²', '°æºÏ');  -- IN() È°¿ë 
+	where addr IN('ê²½ë‚¨', 'ì „ë‚¨', 'ê²½ë¶');  -- IN() í™œìš© 
 
--- ¼ºÀÌ ±è¾¾ÀÎ »ç¶÷ÀÇ ÀÌ¸§°ú Å° Á¶È¸ 
+-- ì„±ì´ ê¹€ì”¨ì¸ ì‚¬ëŒì˜ ì´ë¦„ê³¼ í‚¤ ì¡°íšŒ 
 
 select userName, height from userTbl
-	where userName like '±è%';    -- Àü¹üÀ§ 
+	where userName like 'ê¹€%';    -- ì „ë²”ìœ„ 
 
 select userName, height from userTbl
-	where userName like '_Á¾½Å';  -- ÇÑ±ÛÀÚ 
+	where userName like '_ì¢…ì‹ ';  -- í•œê¸€ì 

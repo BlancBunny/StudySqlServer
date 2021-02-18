@@ -1,13 +1,13 @@
--- UNION / UNION ALL / EXCEPT / INTERSECT 
+ï»¿-- UNION / UNION ALL / EXCEPT / INTERSECT 
 
 use sqlDB;
 select stdName, addr from stdTbl;
 select clubName, roomNo from clubTbl;
 
 
--- UNION / UNION ALL : µÎ Äõ¸®ÀÇ °á°ú¸¦ ÇàÀ¸·Î ÇÕÄ¡´Â °Í 
--- °¢ ¿­ ´ÜÀ§´Â È£È¯µÇ´Â µ¥ÀÌÅÍ Çü½ÄÀÌ¾î¾ß ÇÑ´Ù. 
--- UNION Àº Áßº¹Á¦°Å, ¼ø¼­Á¤·Ä ±â´ÉÀÌ ÀÖ°í UNION ALLÀº ±×´ë·Î ÇÕÄ£´Ù 
+-- UNION / UNION ALL : ë‘ ì¿¼ë¦¬ì˜ ê²°ê³¼ë¥¼ í–‰ìœ¼ë¡œ í•©ì¹˜ëŠ” ê²ƒ 
+-- ê° ì—´ ë‹¨ìœ„ëŠ” í˜¸í™˜ë˜ëŠ” ë°ì´í„° í˜•ì‹ì´ì–´ì•¼ í•œë‹¤. 
+-- UNION ì€ ì¤‘ë³µì œê±°, ìˆœì„œì •ë ¬ ê¸°ëŠ¥ì´ ìˆê³  UNION ALLì€ ê·¸ëŒ€ë¡œ í•©ì¹œë‹¤ 
 select stdName, addr from stdTbl
 	UNION
 select clubName, roomNo from clubTbl; 
@@ -19,16 +19,16 @@ select clubName, roomNo from clubTbl;
 
 
 -- EXCEPT / INTERSECT 
-select userName, mobile1 + mobile2 as '¿¬¶ôÃ³' from userTbl;
+select userName, mobile1 + mobile2 as 'ì—°ë½ì²˜' from userTbl;
 
 
--- A EXCEPT B  => A Áß¿¡¼­ B´Â »©°í µ¿ÀÛ
-select userName, mobile1 + mobile2 as '¿¬¶ôÃ³' from userTbl
+-- A EXCEPT B  => A ì¤‘ì—ì„œ BëŠ” ë¹¼ê³  ë™ì‘
+select userName, mobile1 + mobile2 as 'ì—°ë½ì²˜' from userTbl
 	EXCEPT 
 select userName, mobile1 + mobile2 from userTbl where mobile1 is null; 
 
 
--- A INTERSECT B => A Áß¿¡¼­ B¸¸ Ãâ·Â 
-select userName, mobile1 + mobile2 as '¿¬¶ôÃ³' from userTbl
+-- A INTERSECT B => A ì¤‘ì—ì„œ Bë§Œ ì¶œë ¥ 
+select userName, mobile1 + mobile2 as 'ì—°ë½ì²˜' from userTbl
 	INTERSECT
 select userName, mobile1 + mobile2 from userTbl where mobile1 is null; 

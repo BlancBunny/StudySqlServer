@@ -1,4 +1,4 @@
-
+ï»¿
 
 -- IF --
 declare @var1 int 
@@ -6,32 +6,32 @@ set @var1 = 100
 
 if @var1 = 100
 	BEGIN 
-		print '@var1Àº 100ÀÌ´Ù' 
-		select '@var1 = 100' as '°á°ú'
+		print '@var1ì€ 100ì´ë‹¤' 
+		select '@var1 = 100' as 'ê²°ê³¼'
 	END 
 else 
 	BEGIN
-		print '@var1Àº 100ÀÌ ¾Æ´Ï´Ù' 
+		print '@var1ì€ 100ì´ ì•„ë‹ˆë‹¤' 
 	END
 
 
 select * from buyTbl;
 use sqlDB;
 go 
-select userID, SUM(price * amount) as 'ÃÑ±¸¸Å¾×' 
+select userID, SUM(price * amount) as 'ì´êµ¬ë§¤ì•¡' 
 	from buyTbl 
 	group by userID 
 	order by SUM(price * amount) desc;
 
 
 -- CASE -- 
-select U.userID, U.userName, SUM(price*amount) as 'ÃÑ±¸¸Å¾×',
+select U.userID, U.userName, SUM(price*amount) as 'ì´êµ¬ë§¤ì•¡',
 	CASE 
-		WHEN (SUM(price*amount) >= 1500) THEN N'ÃÖ¿ì¼ö°í°´'
-		WHEN (SUM(price*amount) >= 1000) THEN N'¿ì¼ö°í°´' 
-		WHEN (SUM(price*amount) >= 1) THEN N'ÀÏ¹İ°í°´' 
-		ELSE N'À¯·É°í°´'
-	END as '°í°´µî±Ş' 
+		WHEN (SUM(price*amount) >= 1500) THEN N'ìµœìš°ìˆ˜ê³ ê°'
+		WHEN (SUM(price*amount) >= 1000) THEN N'ìš°ìˆ˜ê³ ê°' 
+		WHEN (SUM(price*amount) >= 1) THEN N'ì¼ë°˜ê³ ê°' 
+		ELSE N'ìœ ë ¹ê³ ê°'
+	END as 'ê³ ê°ë“±ê¸‰' 
 	from buyTbl B 
 	right outer join userTbl U 
 	on B.userID = U.userID 
@@ -57,17 +57,17 @@ use sqlDB;
 go
 
 begin try
-	insert into userTbl values('LSG', 'ÀÌ»ó±¸', 1988, '¼­¿ï', NULL, NULL, 170, GETDATE())
-	print N'Á¤»óÀûÀ¸·Î ÀÔ·ÂµÇ¾ú´Ù.'
+	insert into userTbl values('LSG', 'ì´ìƒêµ¬', 1988, 'ì„œìš¸', NULL, NULL, 170, GETDATE())
+	print N'ì •ìƒì ìœ¼ë¡œ ì…ë ¥ë˜ì—ˆë‹¤.'
 end try
 
 begin catch
-	print N'ÀÔ·Â ½ÇÆĞ' 
+	print N'ì…ë ¥ ì‹¤íŒ¨' 
 end catch 
 
 
 
--- EXEC (½ÇÇà) -- 
+-- EXEC (ì‹¤í–‰) -- 
 use sqlDB; 
 GO 
 

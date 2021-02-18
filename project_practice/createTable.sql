@@ -1,4 +1,4 @@
-use BookRentalShopDB;
+ï»¿use BookRentalShopDB;
 go
 
 create table memberTBL (
@@ -31,8 +31,8 @@ create table booksTBL(
 );
 alter table booksTBL add constraint FK_booksTBL_cateTBL 
 	foreign key(cate_idx) references cateTBL.cate_idx;
-	-- booksTBLÀÇ cate_idx ¿­¿¡¼­ cateTBL.cate_idx ¿­À» ÂüÁ¶ÇÏ´Â Á¦¾à Á¶°Ç Ãß°¡
-	-- booksTBL : ¿Ü·¡Å°, ÀÚ½Ä
+	-- booksTBLì˜ cate_idx ì—´ì—ì„œ cateTBL.cate_idx ì—´ì„ ì°¸ì¡°í•˜ëŠ” ì œì•½ ì¡°ê±´ ì¶”ê°€
+	-- booksTBL : ì™¸ë˜í‚¤, ìì‹
 
 
 create table cateTBL (
@@ -46,18 +46,18 @@ create table rentalTBL (
 	book_idx		int					not null,
 	rentalDate		datetime			null,
 	returnDate		datetime			null,
-	rentalState		char(1)				null,	-- 1 : ´ë¿©, 2 : ¹İ³³, 3 : ¿¬Ã¼ µîµî
+	rentalState		char(1)				null,	-- 1 : ëŒ€ì—¬, 2 : ë°˜ë‚©, 3 : ì—°ì²´ ë“±ë“±
 );
 alter table rentalTBL add constraint FK_rentalTBL_memberTBL
 	foreign key(member_idx) references memberTBL.member_idx;
-	-- rentalTBL Å×ÀÌºí¿¡ FK Á¦¾àÁ¶°Ç Ãß°¡
-	-- rentalTBLÀÇ member_idx Çà¿¡¼­ memberTBL.member_idx À» ÂüÁ¶
+	-- rentalTBL í…Œì´ë¸”ì— FK ì œì•½ì¡°ê±´ ì¶”ê°€
+	-- rentalTBLì˜ member_idx í–‰ì—ì„œ memberTBL.member_idx ì„ ì°¸ì¡°
 
 
 alter table rentalTBL add constraint FK_rentalTBL_booksTBL
 	foreign key(book_idx) references booksTBL.book_idx;
-	-- rentalTBL Å×ÀÌºí¿¡ FK Á¦¾àÁ¶°Ç Ãß°¡ 
-	-- rentalTBLÀÇ book_idx Çà¿¡¼­ booksTBL.book_idx À» ÂüÁ¶ 
+	-- rentalTBL í…Œì´ë¸”ì— FK ì œì•½ì¡°ê±´ ì¶”ê°€ 
+	-- rentalTBLì˜ book_idx í–‰ì—ì„œ booksTBL.book_idx ì„ ì°¸ì¡° 
 
 
 	
